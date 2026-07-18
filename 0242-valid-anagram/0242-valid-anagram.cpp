@@ -1,17 +1,21 @@
 class Solution {
 public:
     bool isAnagram(string s, string t) {
-        // hash map way
+        // hash table using arrays way
         if(s.length() != t.length()){
             return false;
         }
-        unordered_map<char, int> countS;
-        unordered_map<char, int> countT;
-        for(int i = 0; i < s.length(); i++){
-            countS[s[i]]++;
-            countT[t[i]]++;
+        vector<int> count(26,0);
+        for(int i = 0; i<s.length(); i++){
+            count[s[i]-'a']++;
+            count[t[i]-'a']--;
         }
-        return countS == countT;
+        for(int val : count){
+            if(val != 0){
+                return false;
+            }
+        }
+        return true;
         
     }
 };
